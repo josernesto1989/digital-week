@@ -1,0 +1,162 @@
+{% extends "./base.html" %}
+{% block content%}
+
+    <div class="content">
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-3"></div>
+            <div class="col-3"></div>
+        </div>
+    </div>
+
+    
+        <div class="row align-items-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-4">
+                        <div class="container">
+                            {% if form %}
+                                <form action="{% url 'venta_crear' %}" method="POST">{% csrf_token %}
+                                    <h3>Nueva Venta</h3>
+                                    {% for field in form %}
+                                        <div class="row">    
+                                            {{ field.errors }}
+                                            <div class="col-6">
+                                                {{ field.label_tag }}
+                                            </div> 
+                                            <div class="col-6">
+                                                {{ field }}
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <input type="submit"  class="btn btn-primary " style="width:100%" value="Crear Venta">
+                                        </div>
+                                    </div>
+                                </form>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        {% if otroGastoForm %}
+                            <form action="{% url 'otroGasto_crear' %}" method="POST">{% csrf_token %}
+                                <h3>Nuevo Gasto</h3>
+                                {% for field in otroGastoForm %}
+                                    <div class="row">    
+                                        {{ field.errors }}
+                                        <div class="col-6">
+                                            {{ field.label_tag }}
+                                        </div> 
+                                        <div class="col-6">
+                                            {{ field }}
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                                <div class="row">
+                                    <div class="col-12">
+                                        <input type="submit"  class="btn btn-primary " style="width:100%" value="Crear Gasto">
+                                    </div>
+                                </div>
+                            </form>
+                        {% endif %}
+                    </div>
+                    <div class="col-4">
+                        {% if piezaAPagarForm %}
+                                <form action="{% url 'piezaAPagar_crear' %}" method="POST">{% csrf_token %}
+                                    <h3>Nueva Pieza a pagar</h3>
+                                    {% for field in piezaAPagarForm %}
+                                        <div class="row">    
+                                            {{ field.errors }}
+                                            <div class="col-6">
+                                                {{ field.label_tag }}
+                                            </div> 
+                                            <div class="col-6">
+                                                {{ field }}
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <input type="submit"  class="btn btn-primary " style="width:100%" value="Crear Pieza a Pagar">
+                                        </div>
+                                    </div>
+                                </form>
+                            {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            {% if ventasList %}
+            <h3>Ventas</h3>
+                <table class="table">
+                    <tr>
+                        <th>hora</th>
+                        <th>Trabajo</th>
+                        <th>Nombre</th>
+                        <th>Ingreso</th>
+                        <th>Costo</th>
+                        <th>Tecnico</th>
+                    </tr>
+                    {% for venta in ventasList %}
+                    <tr>
+                        <td>{{ venta.hora }}</td>
+                        <td>{{ venta.tipoTrabajo }}</td>
+                        <td>{{ venta.nombre }}</td>
+                        <td>{{ venta.ingreso }}</td>
+                        <td>{{ venta.costo }}</td>
+                        <td>{{ venta.tecnico }}</td>
+                    </tr>
+                        
+                    {% endfor %}
+                    
+                    
+                </table>
+            {% endif %}
+        </div>
+
+        <div>
+            {% if otroGastoList %}
+            <h3>Gastps</h3>
+                <table class="table">
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Comentario</th>
+                        <th>Precio</th>
+                    </tr>
+                    {% for otroGasto in otroGastoList %}
+                    <tr>
+                        <td>{{ otroGasto.nombre }}</td>
+                        <td>{{ otroGasto.comentarios }}</td>
+                        <td>{{ otroGasto.precio }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            {% endif %}
+        </div>
+
+        <div>
+            {% if piezasAPagarList %}
+            <h3>Piezas a Pagar</h3>
+                <table class="table">
+                    <tr>
+                        <th>Pieza</th>
+                        <th>Comentario</th>
+                        <th>Costo</th>
+                    </tr>
+                    {% for pieza in piezasAPagarList %}
+                    <tr>
+                        <td>{{ pieza.nombre }}</td>
+                        <td>{{ pieza.comentarios }}</td>
+                        <td>{{ pieza.precio }}</td>
+                    </tr>
+                        
+                    {% endfor %}
+                    
+                    
+                </table>
+            {% endif %}
+        </div>
+{% endblock content %}

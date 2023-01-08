@@ -1,0 +1,19 @@
+{% extends "./base.html" %}
+{% block content%}
+<form action="{% url 'dia_crear' %}" method="POST">{% csrf_token %}
+    <div class="row g-3 align-items-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-8">
+                    <div class="container">
+                        <div class="col-4">
+                            {{ form }}
+                            <input type="submit"  class="btn btn-primary" value="Abrir">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock content %}

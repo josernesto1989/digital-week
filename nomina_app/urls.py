@@ -15,7 +15,22 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from nomina_app import views
+# from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('',views.mainView, name ='main'),
+    path('semana/abrir',views.createSemana, name ='semana_abrir'),
+    path('semana/crear',views.createNewSemana, name ='semana_crear'),
+    path('dia/abrir',views.createDia, name ='dia_abrir'),
+    path('dia/cerrar',views.colseDay, name ='dia_cerrar'),
+    path('dia/crear',views.createNewDia, name ='dia_crear'),
+    path('venta/crear',views.createNewVenta, name ='venta_crear'),
+    path('otro-gasto/crear',views.createNewGasto, name ='otroGasto_crear'),
+    path('pieza-a-pagar/crear',views.createNewPiezaAPagar, name ='piezaAPagar_crear'),
+    path('template',views.template, name ='template'),
+    path('excel/export',views.exportToExcel, name ='toExcel'),
+    
+    
 ]
